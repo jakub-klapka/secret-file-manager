@@ -32,15 +32,8 @@ class CPT {
 		);
 
 		register_post_type( 'secret_files', array(
-			'labels'              => $labels,
-			'public'              => true,
-			'publicly_queryable'  => false,
-			'exclude_from_search' => true,
-			'menu_position'       => 20,
-			'capability_type'     => array( 'secret_file', 'secret_files' ),
-			'map_meta_cap'        => true,
-			'supports'            => array( 'title' ),
-			'rewrite'             => false
+			'public'  => false,
+			'rewrite' => false
 		) );
 
 	}

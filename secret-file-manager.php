@@ -10,6 +10,7 @@
 namespace Lumiart\SecretFileManager;
 
 define( 'LUMI_SFM_CORE_PATH', plugin_dir_path( __FILE__ ) . 'core' . DIRECTORY_SEPARATOR );
+define( 'LUMI_SFM_TEMPLATES_PATH', plugin_dir_path( __FILE__ ) . 'templates' . DIRECTORY_SEPARATOR );
 
 /**
  * @var array $lumi_sfm Array containing references to all SFM classes
@@ -19,7 +20,9 @@ global $lumi_sfm;
 
 $lumi_sfm = array(
 	'plugin_base_file_path' => __FILE__,
-	'capability'            => 'manage_secret_files'
+	'capability'            => 'manage_secret_files',
+	'files_path'            => ABSPATH . 'wp-secret-files',
+	'import_path'           => ABSPATH . 'wp-secret-files/import'
 );
 
 
@@ -44,3 +47,13 @@ foreach ( $classes_to_load as $scope => $files ) {
 		}
 	}
 }
+
+/**
+ * Install and uninstall hooks
+ */
+register_activation_hook( __FILE__, function () {
+	include_once LUMI_SFM_CORE_PATH . 'InstallUninstall.php';
+	$inst = new InstallUninstall();
+	$inst->add_capabilities_to_admin();
+} );
+
