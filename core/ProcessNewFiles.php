@@ -46,7 +46,7 @@ class ProcessNewFiles {
 
 		//move file to new dir
 		$pathinfo      = pathinfo( $file_name );
-		$new_name      = sanitize_title_with_dashes( $pathinfo['filename'] ) . $pathinfo['extension'];
+		$new_name      = sanitize_title_with_dashes( sanitize_title( iconv( "windows-1250", "UTF-8", $pathinfo['filename'] ) ) ) . '.' . $pathinfo['extension'];
 		$new_directory = $lumi_sfm['files_path'] . DIRECTORY_SEPARATOR . $directory_token;
 		$mkdir         = mkdir( $new_directory, 0777, true );
 		$rename        = rename( $file_path, $new_directory . DIRECTORY_SEPARATOR . $new_name );
@@ -61,7 +61,7 @@ class ProcessNewFiles {
 		//create post
 		$post = wp_insert_post( array(
 			'post_name'   => $new_name,
-			'post_title'  => $file_name,
+			'post_title'  => iconv( "windows-1250", "UTF-8", $file_name ),
 			'post_status' => 'publish',
 			'post_type'   => 'secret_files'
 		) );
@@ -92,7 +92,9 @@ class ProcessNewFiles {
 		}
 
 		global $lumi_sfm;
-		$lumi_sfm['admin_notices'][] = array( 'type' => 'updated', 'message' => 'Úspěšně přidán soubor' . $file_name );
+		$lumi_sfm['admin_notices'][] = array( 'type'    => 'updated',
+		                                      'message' => 'Úspěšně přidán soubor ' . iconv( "windows-1250", "UTF-8", $file_name )
+		);
 	}
 
 }
