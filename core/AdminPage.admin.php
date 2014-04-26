@@ -15,7 +15,7 @@ class AdminPage {
 		add_menu_page( 'Skryté soubory', 'Skryté soubory', $lumi_sfm['capability'], 'lumi-secret-files', array(
 				$this,
 				'display_menu_page'
-			) ); //TODO: icon, position
+			), 'dashicons-lock', 21 );
 	}
 
 	public function display_menu_page() {

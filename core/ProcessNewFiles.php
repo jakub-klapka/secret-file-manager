@@ -24,8 +24,10 @@ class ProcessNewFiles {
 			return true;
 		} );
 
-		if ( $new_files === false ) {
-			//TODO: notification
+		if ( empty( $new_files ) ) {
+			global $lumi_sfm;
+			$lumi_sfm['admin_notices'][] = array( 'type' => 'error', 'message' => 'Žádné nové soubory nenalezeny' );
+
 			return;
 		}
 
@@ -50,7 +52,9 @@ class ProcessNewFiles {
 		$rename        = rename( $file_path, $new_directory . DIRECTORY_SEPARATOR . $new_name );
 
 		if ( $mkdir == false || $rename == false ) {
-			//TODO: notification about unsucessful rename
+			global $lumi_sfm;
+			$lumi_sfm['admin_notices'][] = array( 'type' => 'error', 'message' => 'Nepodařilo se zpracovat soubory' );
+
 			return;
 		}
 
@@ -63,8 +67,32 @@ class ProcessNewFiles {
 		) );
 
 		//Add metadata
-		update_post_meta( $post, 'directory_token', $directory_token );
-		update_post_meta( $post, 'url_token', $url_token );
+		if ( $post == 0 ) {
+			global $lumi_sfm;
+			$lumi_sfm['admin_notices'][] = array(
+				'type'    => 'error',
+				'message' => 'Nepodařilo se zapsat nový soubor do databáze'
+			);
+
+			return;
+		}
+
+		$u[] = update_post_meta( $post, 'directory_token', $directory_token );
+		$u[] = update_post_meta( $post, 'url_token', $url_token );
+		$u[] = update_post_meta( $post, 'download_count', 0 );
+
+		if ( in_array( false, $u ) ) {
+			global $lumi_sfm;
+			$lumi_sfm['admin_notices'][] = array(
+				'type'    => 'error',
+				'message' => 'Nepodařilo se aktualizovat metadata souboru.'
+			);
+
+			return;
+		}
+
+		global $lumi_sfm;
+		$lumi_sfm['admin_notices'][] = array( 'type' => 'updated', 'message' => 'Úspěšně přidán soubor' . $file_name );
 	}
 
 }

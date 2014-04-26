@@ -49,6 +49,29 @@ foreach ( $classes_to_load as $scope => $files ) {
 }
 
 /**
+ * Template classes loading
+ * Those contain functions used in templates - which are loaded on demand to save mem
+ * Will return reference to class, which can contain your functions. It will load the class, if it's not loaded yet.
+ * @var string $name
+ * @return \Lumiart\SecretFileManager\Template\AdminPage
+ */
+function lumi_sfm_template( $name ) {
+	if ( empty( $name ) ) {
+		return false;
+	}
+
+	if ( isset( $lumi_sfm['Template'][ $name ] ) ) {
+		return $lumi_sfm['Template'][ $name ]; //If template functions are already loaded
+	}
+
+	include_once LUMI_SFM_CORE_PATH . $name . '.template.php';
+	$class_name                    = '\\Lumiart\\SecretFileManager\\Template\\' . $name;
+	$lumi_sfm['Template'][ $name ] = new $class_name;
+
+	return $lumi_sfm['Template'][ $name ];
+}
+
+/**
  * Install and uninstall hooks
  */
 register_activation_hook( __FILE__, function () {
