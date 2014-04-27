@@ -1,0 +1,10 @@
+{
+  "name": "secret-file-manager",
+  "author": "Jakub Klapka",
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-sass": "~0.7.3",
+    "grunt-autoprefixer": "~0.7.3"
+  }
+}

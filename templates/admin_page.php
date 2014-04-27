@@ -1,5 +1,5 @@
 <?php $a = \Lumiart\SecretFileManager\lumi_sfm_template('AdminPage'); ?>
-<div class="wrap">
+<div class="wrap lumi_sfm">
 	<h2>Skryté soubory<a class="add-new-h2" href="<?= admin_url('admin.php?page=lumi-secret-files&check_new_files=true'); ?>">Importovat nové soubory</a></h2>
 	<?php $notices = $a->get_notices(); ?>
 	<?php if( $notices !== false ) : ?>
@@ -14,26 +14,26 @@
 			<tr>
 				<th class="manage-column">Název</th>
 				<th class="manage-column">Odkaz</th>
+				<th class="manage-column">Počet stažení</th>
 				<th class="manage-column">Datum přidání</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>Test</td>
-				<td>Odkaz</td>
-				<td>Datum</td>
-			</tr>
-			<tr>
-				<td>Test</td>
-				<td>Odkaz</td>
-				<td>Datum</td>
-			</tr>
-			<tr>
-				<td>Test</td>
-				<td>Odkaz</td>
-				<td>Datum</td>
-			</tr>
-
+			<?php $files = $a->get_files(); ?>
+			<?php foreach( $files as $file ) : ?>
+				<tr>
+					<td class="post-title"><strong><?= $file['title']; ?></strong>
+						<div class="row-actions">
+							<span class="trash">
+								<a class="submitdelete" title="Smazat" href="">Odstranit</a>
+							</span>
+						</div>
+					</td>
+					<td><input type="text" disabled value="<?= $file['url']; ?>" size="60"/><button type="button" class="copy_to_clipboard">Kopírovat URL do schránky</button></td>
+					<td><?= $file['download_count']; ?></td>
+					<td><?= $file['date']; ?></td>
+				</tr>
+			<?php endforeach; ?>
 		</tbody>
 	</table>
 </div>

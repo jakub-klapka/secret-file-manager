@@ -11,6 +11,7 @@ namespace Lumiart\SecretFileManager;
 
 define( 'LUMI_SFM_CORE_PATH', plugin_dir_path( __FILE__ ) . 'core' . DIRECTORY_SEPARATOR );
 define( 'LUMI_SFM_TEMPLATES_PATH', plugin_dir_path( __FILE__ ) . 'templates' . DIRECTORY_SEPARATOR );
+define( 'LUMI_SFM_CSS_JS_VER', 1 );
 
 /**
  * @var array $lumi_sfm Array containing references to all SFM classes

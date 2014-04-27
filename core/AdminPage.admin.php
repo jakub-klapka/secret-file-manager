@@ -8,6 +8,8 @@ class AdminPage {
 
 	public function __construct() {
 		add_action( 'admin_menu', array( $this, 'add_admin_menu' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		//$this->enqueue_scripts();
 	}
 
 	public function add_admin_menu() {
@@ -31,6 +33,13 @@ class AdminPage {
 
 		require LUMI_SFM_TEMPLATES_PATH . 'admin_page.php';
 
+	}
+
+	public function enqueue_scripts($hook) {
+		if( $hook == 'toplevel_page_lumi-secret-files' ) {
+			global $lumi_sfm;
+			wp_enqueue_style( 'lumi-secret-files', plugins_url( 'css/lumi_secret_files_admin.css', $lumi_sfm['plugin_base_file_path'] ), array(), LUMI_SFM_CSS_JS_VER );
+		}
 	}
 
 } 
