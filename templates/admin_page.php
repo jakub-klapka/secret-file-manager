@@ -29,7 +29,10 @@
 							</span>
 						</div>
 					</td>
-					<td><input type="text" disabled value="<?= $file['url']; ?>" size="60"/><button type="button" class="copy_to_clipboard">Kopírovat URL do schránky</button></td>
+					<td>
+						<input type="text" disabled value="<?= $file['url']; ?>" size="60"/>
+						<button type="button" class="copy_to_clipboard" data-clipboard-text="<?= $file['url']; ?>">Kopírovat URL do schránky</button>
+					</td>
 					<td><?= $file['download_count']; ?></td>
 					<td><?= $file['date']; ?></td>
 				</tr>
