@@ -22,6 +22,7 @@ global $lumi_sfm;
 $lumi_sfm = array(
 	'plugin_base_file_path' => __FILE__,
 	'capability'            => 'manage_secret_files',
+	'files_url'             => get_bloginfo( 'url' ) . '/wp-secret-files',
 	'files_path'            => ABSPATH . 'wp-secret-files',
 	'import_path'           => ABSPATH . 'wp-secret-files/import'
 );

@@ -44,6 +44,8 @@ class ProcessNewFiles {
 		$directory_token = substr( str_shuffle( "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" ), 0, 30 );
 		$url_token       = substr( str_shuffle( "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" ), 0, 6 );
 
+		//TODO: check for existing dir
+
 		//move file to new dir
 		$pathinfo      = pathinfo( $file_name );
 		$new_name      = sanitize_title_with_dashes( sanitize_title( iconv( "windows-1250", "UTF-8", $pathinfo['filename'] ) ) ) . '.' . $pathinfo['extension'];
@@ -92,8 +94,9 @@ class ProcessNewFiles {
 		}
 
 		global $lumi_sfm;
-		$lumi_sfm['admin_notices'][] = array( 'type'    => 'updated',
-		                                      'message' => 'Úspěšně přidán soubor ' . iconv( "windows-1250", "UTF-8", $file_name )
+		$lumi_sfm['admin_notices'][] = array(
+			'type'    => 'updated',
+			'message' => 'Úspěšně přidán soubor ' . iconv( "windows-1250", "UTF-8", $file_name )
 		);
 	}
 
