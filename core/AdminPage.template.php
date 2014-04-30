@@ -43,6 +43,8 @@ class AdminPage {
 
 		$output['date'] = $post->post_date;
 
+		$output['id'] = $post->ID;
+
 		return $output;
 	}
 

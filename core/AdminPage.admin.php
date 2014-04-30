@@ -31,6 +31,11 @@ class AdminPage {
 			include_once LUMI_SFM_CORE_PATH . 'ProcessNewFiles.php';
 		}
 
+		if ( isset( $_REQUEST['delete'] ) ) {
+			include_once LUMI_SFM_CORE_PATH . 'DeleteFile.php';
+		}
+
+
 		require LUMI_SFM_TEMPLATES_PATH . 'admin_page.php';
 
 	}

@@ -25,7 +25,7 @@
 					<td class="post-title"><strong><?= $file['title']; ?></strong>
 						<div class="row-actions">
 							<span class="trash">
-								<a class="submitdelete" title="Smazat" href="">Odstranit</a>
+								<a class="submitdelete" title="Smazat" href="<?= admin_url('admin.php?page=lumi-secret-files&delete=' . $file['id']); ?>">Odstranit</a>
 							</span>
 						</div>
 					</td>
