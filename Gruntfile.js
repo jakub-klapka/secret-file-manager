@@ -52,6 +52,24 @@ module.exports = function(grunt) {
 				src: 'js/lumi_secret_files_admin.js',
 				dest: 'js/lumi_secret_files_admin.js'
 			}
+		},
+		compress: {
+			options: {
+				archive: 'secret-file-manager.zip'
+			},
+			build_plugin: {
+				files: [{
+					expand: true,
+					cwd: '../',
+					src: [
+						'secret-file-manager/core/**',
+						'secret-file-manager/css/**',
+						'secret-file-manager/js/**',
+						'secret-file-manager/templates/**',
+						'secret-file-manager/secret-file-manager.php',
+					],
+				}]
+			}
 		}
 	});
 
@@ -61,6 +79,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-closure-tools');
+	grunt.loadNpmTasks('grunt-contrib-compress');
 
 
 	grunt.registerTask('css', ['sass:all_files', 'autoprefixer:all_files']);
@@ -71,5 +90,6 @@ module.exports = function(grunt) {
 
 	// Default task(s).
 	grunt.registerTask('default', ['css', 'js']);
+	grunt.registerTask('build_plugin', ['compress:build_plugin']);
 
 };
