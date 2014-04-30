@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Secret File Manager
- * Description: Upload big files via FTP and create secret link to send them to clients
+ * Plugin Name: Lumiart's Secret Files Manager
+ * Description: Upload big files via FTP and create secret link to send them to clients.
  * Version: 0.9
- * Author: Jakub Klapka (Lumiart.cz)
+ * Author: Jakub Klapka
  * Author URI: http://www.lumiart.cz
  */
 
@@ -80,5 +80,6 @@ register_activation_hook( __FILE__, function () {
 	include_once LUMI_SFM_CORE_PATH . 'InstallUninstall.php';
 	$inst = new InstallUninstall();
 	$inst->add_capabilities_to_admin();
+	$inst->create_dirs();
 } );
 

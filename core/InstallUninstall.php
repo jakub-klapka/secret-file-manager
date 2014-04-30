@@ -15,4 +15,10 @@ class InstallUninstall {
 
 	}
 
+	public function create_dirs() {
+		global $lumi_sfm;
+		mkdir( $lumi_sfm['files_path'] );
+		mkdir( $lumi_sfm['import_path'] );
+	}
+
 } 
