@@ -81,5 +81,12 @@ register_activation_hook( __FILE__, function () {
 	$inst = new InstallUninstall();
 	$inst->add_capabilities_to_admin();
 	$inst->create_dirs();
+	$inst->flush_rewrite();
+} );
+
+register_deactivation_hook( __FILE__, function () {
+	include_once LUMI_SFM_CORE_PATH . 'InstallUninstall.php';
+	$inst = new InstallUninstall();
+	$inst->flush_rewrite();
 } );
 

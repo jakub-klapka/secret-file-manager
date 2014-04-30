@@ -17,8 +17,16 @@ class InstallUninstall {
 
 	public function create_dirs() {
 		global $lumi_sfm;
-		mkdir( $lumi_sfm['files_path'] );
-		mkdir( $lumi_sfm['import_path'] );
+		if( !is_dir( $lumi_sfm['files_path'] ) ){
+			mkdir( $lumi_sfm['files_path'] );
+		}
+		if( !is_dir( $lumi_sfm['import_path'] ) ){
+			mkdir( $lumi_sfm['import_path'] );
+		}
+	}
+
+	public function flush_rewrite() {
+		flush_rewrite_rules(); //TODO: not working
 	}
 
 } 

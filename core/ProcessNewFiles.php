@@ -47,11 +47,12 @@ class ProcessNewFiles {
 		//TODO: check for existing dir
 
 		//move file to new dir
-		$pathinfo      = pathinfo( $file_name );
-		$new_name      = sanitize_title_with_dashes( sanitize_title( iconv( "windows-1250", "UTF-8", $pathinfo['filename'] ) ) ) . '.' . $pathinfo['extension'];
-		$new_directory = $lumi_sfm['files_path'] . DIRECTORY_SEPARATOR . $directory_token;
-		$mkdir         = mkdir( $new_directory, 0777, true );
-		$rename        = rename( $file_path, $new_directory . DIRECTORY_SEPARATOR . $new_name );
+		$server_file_encoding = mb_detect_encoding( $file_name );
+		$pathinfo             = pathinfo( $file_name );
+		$new_name             = sanitize_title_with_dashes( sanitize_title( iconv( $server_file_encoding, "UTF-8", $pathinfo['filename'] ) ) ) . '.' . $pathinfo['extension'];
+		$new_directory        = $lumi_sfm['files_path'] . DIRECTORY_SEPARATOR . $directory_token;
+		$mkdir                = mkdir( $new_directory, 0777, true );
+		$rename               = rename( $file_path, $new_directory . DIRECTORY_SEPARATOR . $new_name );
 
 		if ( $mkdir == false || $rename == false ) {
 			global $lumi_sfm;
@@ -63,7 +64,7 @@ class ProcessNewFiles {
 		//create post
 		$post = wp_insert_post( array(
 			'post_name'   => $new_name,
-			'post_title'  => iconv( "windows-1250", "UTF-8", $file_name ),
+			'post_title'  => iconv( $server_file_encoding, "UTF-8", $file_name ),
 			'post_status' => 'publish',
 			'post_type'   => 'secret_files'
 		) );
@@ -96,7 +97,7 @@ class ProcessNewFiles {
 		global $lumi_sfm;
 		$lumi_sfm['admin_notices'][] = array(
 			'type'    => 'updated',
-			'message' => 'Úspěšně přidán soubor ' . iconv( "windows-1250", "UTF-8", $file_name )
+			'message' => 'Úspěšně přidán soubor ' . iconv( $server_file_encoding, "UTF-8", $file_name )
 		);
 	}
 
