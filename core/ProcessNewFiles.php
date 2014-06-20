@@ -52,7 +52,8 @@ class ProcessNewFiles {
 		$new_name             = sanitize_title_with_dashes( sanitize_title( iconv( $server_file_encoding, "UTF-8", $pathinfo['filename'] ) ) ) . '.' . $pathinfo['extension'];
 		$new_directory        = $lumi_sfm['files_path'] . DIRECTORY_SEPARATOR . $directory_token;
 		$mkdir                = mkdir( $new_directory, 0777, true );
-		$rename               = rename( $file_path, $new_directory . DIRECTORY_SEPARATOR . $new_name );
+		$new_file_path = $new_directory . DIRECTORY_SEPARATOR . $new_name;
+		$rename               = rename( $file_path, $new_file_path );
 
 		if ( $mkdir == false || $rename == false ) {
 			global $lumi_sfm;
@@ -60,6 +61,8 @@ class ProcessNewFiles {
 
 			return;
 		}
+
+		chmod( $new_file_path, 0644 );
 
 		//create post
 		$post = wp_insert_post( array(
