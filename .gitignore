@@ -1,3 +1,4 @@
+.idea
 node_modules
 .sass-cache
 secret-file-manager.zip
