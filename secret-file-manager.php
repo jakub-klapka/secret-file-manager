@@ -24,7 +24,8 @@ $lumi_sfm = array(
 	'capability'            => 'manage_secret_files',
 	'files_url'             => get_bloginfo( 'url' ) . '/wp-secret-files',
 	'files_path'            => ABSPATH . 'wp-secret-files',
-	'import_path'           => ABSPATH . 'wp-secret-files/import'
+	'import_path'           => ABSPATH . 'wp-secret-files/import',
+	'storage_limit'         => defined( 'LUMI_SFM_STORAGE_LIMIT' ) ? LUMI_SFM_STORAGE_LIMIT : 2 * 1024 * 1024 * 1024
 );
 
 
@@ -84,4 +85,12 @@ register_activation_hook( __FILE__, function () {
 	$inst->flush_rewrite_activate();
 } );
 
-
+/**
+ * PSR Autoloader
+ */
+spl_autoload_register( function( $class_name ) {
+	$namespace = "Lumiart\\SecretFileManager\\";
+	if( substr( $class_name, 0, strlen( $namespace ) ) === $namespace ) {
+		require_once( str_replace( "\\", '/', substr( $class_name, strlen( $namespace ) ) ) . '.php' );
+	}
+} );
