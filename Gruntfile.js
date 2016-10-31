@@ -62,6 +62,8 @@ module.exports = function(grunt) {
 					expand: true,
 					cwd: '../',
 					src: [
+						'secret-file-manager/Helpers/**',
+						'secret-file-manager/Models/**',
 						'secret-file-manager/core/**',
 						'secret-file-manager/css/**',
 						'secret-file-manager/js/**',
