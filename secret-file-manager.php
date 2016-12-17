@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Lumiart's Secret Files Manager
  * Description: Upload big files via FTP and create secret link to send them to clients.
- * Version: 1.0
+ * Version: 1.1
  * Author: Jakub Klapka
  * Author URI: http://www.lumiart.cz
  */
@@ -11,7 +11,7 @@ namespace Lumiart\SecretFileManager;
 
 define( 'LUMI_SFM_CORE_PATH', plugin_dir_path( __FILE__ ) . 'core' . DIRECTORY_SEPARATOR );
 define( 'LUMI_SFM_TEMPLATES_PATH', plugin_dir_path( __FILE__ ) . 'templates' . DIRECTORY_SEPARATOR );
-define( 'LUMI_SFM_CSS_JS_VER', 2 );
+define( 'LUMI_SFM_CSS_JS_VER', 3 );
 
 /**
  * @var array $lumi_sfm Array containing references to all SFM classes
@@ -20,7 +20,7 @@ $lumi_sfm = array();
 global $lumi_sfm;
 
 $lumi_sfm = array(
-	'static_version'        => 2,
+	'static_version'        => 3,
 	'plugin_base_file_path' => __FILE__,
 	'capability'            => 'manage_secret_files',
 	'files_url'             => get_bloginfo( 'url' ) . '/wp-secret-files',

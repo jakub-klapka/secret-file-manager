@@ -39,8 +39,8 @@
 						</div>
 					</td>
 					<td>
-						<input type="text" disabled value="<?= $file['url']; ?>" size="60"/>
-						<button type="button" class="copy_to_clipboard" data-clipboard-text="<?= $file['url']; ?>">Kopírovat URL do schránky</button>
+						<input type="text" id="file_<?= $file['id']; ?>" readonly="readonly" value="<?= $file['url']; ?>" size="60"/>
+						<button type="button" class="copy_to_clipboard" data-clipboard-target="#file_<?= $file['id']; ?>">Kopírovat URL do schránky</button>
 					</td>
 					<td><?= $file['download_count']; ?></td>
 					<td><?= $file['date']; ?></td>

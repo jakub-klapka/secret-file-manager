@@ -1,14 +1,14 @@
 {
-  "name": "secret-file-manager",
-  "author": "Jakub Klapka",
-  "license": "BSD-2-Clause",
+  "private": true,
+  "scripts": {
+    "prod": "gulp --production",
+    "dev": "gulp watch"
+  },
   "devDependencies": {
-    "grunt": "~0.4.4",
-    "grunt-contrib-sass": "~0.7.3",
-    "grunt-autoprefixer": "~0.7.3",
-    "grunt-contrib-concat": "~0.4.0",
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-closure-tools": "~0.9.6",
-    "grunt-contrib-compress": "~0.8.0"
+    "gulp": "^3.9.1",
+    "laravel-elixir": "^6.0.0-14",
+    "gulp-clean": "^0.3.2",
+    "gulp-copy": "^1.0.0",
+    "gulp-zip": "^3.2.0"
   }
 }
